@@ -1,0 +1,39 @@
+name: Build iPhone IPA
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  ipa:
+    runs-on: macos-15
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Resolve ONNX Runtime
+        run: |
+          pod --version
+          pod install
+      - name: Build arm64 for iPhone
+        run: |
+          set -o pipefail
+          xcodebuild -version
+          xcodebuild -workspace CoinDetector.xcworkspace -scheme CoinDetector \
+            -configuration Release -destination 'generic/platform=iOS' \
+            -derivedDataPath build ARCHS=arm64 CODE_SIGNING_ALLOWED=NO build
+      - name: Package unsigned IPA
+        run: |
+          set -euo pipefail
+          app=build/Build/Products/Release-iphoneos/CoinDetector.app
+          test -x "$app/CoinDetector"
+          /usr/bin/plutil -extract NSCameraUsageDescription raw "$app/Info.plist"
+          mkdir Payload
+          ditto "$app" Payload/CoinDetector.app
+          zip -qry coin-detector.ipa Payload
+          unzip -tq coin-detector.ipa
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coin-detector
+          path: coin-detector.ipa
+          if-no-files-found: error
