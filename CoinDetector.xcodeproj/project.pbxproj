@@ -4,7 +4,7 @@
  classes = {};
  objectVersion = 56;
  objects = {
- 000000000000000000000001 = {isa = PBXProject; buildConfigurationList = 00000000000000000000000c; compatibilityVersion = "Xcode 14.0"; developmentRegion = ja; knownRegions = (ja, en, Base); mainGroup = 000000000000000000000003; targets = (000000000000000000000002); };
+ 000000000000000000000001 = {isa = PBXProject; projectDirPath = ""; projectRoot = ""; buildConfigurationList = 00000000000000000000000c; compatibilityVersion = "Xcode 14.0"; developmentRegion = ja; knownRegions = (ja, en, Base); mainGroup = 000000000000000000000003; targets = (000000000000000000000002); };
  000000000000000000000002 = {isa = PBXNativeTarget; name = CoinDetector; productName = CoinDetector; productReference = 000000000000000000000004; productType = "com.apple.product-type.application"; buildConfigurationList = 00000000000000000000000d; buildPhases = (00000000000000000000000a, 00000000000000000000000b); buildRules = (); dependencies = (); };
  000000000000000000000003 = {isa = PBXGroup; children = (000000000000000000000005, 000000000000000000000006, 000000000000000000000004); sourceTree = "<group>"; };
  000000000000000000000004 = {isa = PBXFileReference; explicitFileType = wrapper.application; path = CoinDetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
